@@ -2,12 +2,13 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 
 export default function ContactForm() {
-  const feedBackSchema = Yup.object().shape({
+  const contactFormSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
     phoneNumber: Yup.string()
+      .matches(/^[0-9]+$/, "Must be only digits")
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
@@ -21,6 +22,7 @@ export default function ContactForm() {
       <Formik
         initialValues={{ name: "", phoneNumber: "" }}
         onSubmit={handleSubmit}
+        validationSchema={contactFormSchema}
       >
         <Form>
           <Field type="text" name="name" />
