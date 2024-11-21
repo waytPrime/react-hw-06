@@ -20,7 +20,7 @@ export default function ContactForm() {
   const handleSubmit = (values, actions) => {
     console.log(values);
 
-    dispatch(addContact(values));
+    dispatch(addContact({ ...values, name: "Руся лох" }));
 
     actions.resetForm();
   };
