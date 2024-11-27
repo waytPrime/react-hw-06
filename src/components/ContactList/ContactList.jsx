@@ -1,18 +1,22 @@
-import { useSelector } from "react-redux";
-import Contact from "../Contact/Contact";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  selectContacts,
   selectError,
   selectLoading,
   selectVisibleContacts,
 } from "../../redux/ContactSlice";
-import { selectFilter } from "../../redux/FilterSlice";
+import { useEffect } from "react";
+import { fetchContacts } from "../../redux/ContactsOps";
+
+import Contact from "../Contact/Contact";
 
 export default function ContactList() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   const isError = useSelector(selectError);
   const isLoading = useSelector(selectLoading);
-  const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilter);
   const visibleContacts = useSelector(selectVisibleContacts);
 
   return (

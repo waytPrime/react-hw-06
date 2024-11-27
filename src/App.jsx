@@ -1,27 +1,19 @@
-import ContactForm from "./components/ContactForm/ContactForm";
-import ContactList from "./components/ContactList/ContactList";
-import SearchBox from "./components/SearchBox/SearchBox";
+import { Route, Routes } from "react-router-dom";
 
-import { fetchContacts } from "./redux/ContactsOps";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import HomePage from "./Pages/HomePage/HomePage";
+import ContactPage from "./Pages/Contact/ContactPage";
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Register/Register";
 
 function App() {
-  const f = function () {
-    console.log(this);
-  };
-  f();
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      <ContactList />
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/contacts" element={<ContactPage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="*" element={<HomePage />} />
+    </Routes>
   );
 }
 
